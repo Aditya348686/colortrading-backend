@@ -1,0 +1,15 @@
+{
+  "short_name": "ColorTrade",
+  "name": "Color Trading Gaming Platform",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#071126",
+  "theme_color": "#ff3d7f",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}
