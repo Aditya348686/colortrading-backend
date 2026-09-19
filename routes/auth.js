@@ -134,14 +134,92 @@ router.post('/login', async (req, res) => {
   }
 });
 
-router.post('/forgot-password', async (req, res) => {
-  const { email } = req.body;
+// Store OTPs in memory with 5 min expiry
+const otpStore = new Map();
+
+// Send OTP for Forgot Password
+router.post('/send-otp', async (req, res) => {
+  const { mobile, email } = req.body;
+  const identifier = mobile || email;
+  if (!identifier) {
+    return res.status(400).json({ message: 'Phone number or email is required' });
+  }
+
   try {
-    const user = await getUser({ email });
+    const user = await getUser({ $or: [{ mobile: identifier }, { email: identifier }] });
+    if (!user) {
+      return res.status(404).json({ message: 'No account found with this phone number or email.' });
+    }
+
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const expiresAt = Date.now() + 5 * 60 * 1000; // 5 minutes
+
+    otpStore.set(identifier, { otp, expiresAt, userId: user._id });
+
+    // Send SMS via Fast2SMS if API key present
+    if (process.env.FAST2SMS_API_KEY && mobile) {
+      try {
+        const axios = require('axios');
+        await axios.post('https://www.fast2sms.com/dev/bulkV2', {
+          route: 'otp',
+          variables_values: otp,
+          numbers: mobile
+        }, {
+          headers: { 'authorization': process.env.FAST2SMS_API_KEY }
+        });
+      } catch (smsErr) {
+        console.error('[SMS Error]', smsErr.message);
+      }
+    }
+
+    console.log(`[OTP Generated] For ${identifier}: ${otp}`);
+
+    res.json({
+      success: true,
+      message: `OTP sent successfully to ${identifier}`
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Reset Password with OTP Verification
+router.post('/reset-password', async (req, res) => {
+  const { mobile, email, otp, newPassword } = req.body;
+  const identifier = mobile || email;
+
+  if (!identifier || !otp || !newPassword) {
+    return res.status(400).json({ message: 'All fields are required' });
+  }
+
+  try {
+    const record = otpStore.get(identifier);
+    if (!record) {
+      return res.status(400).json({ message: 'OTP expired or not requested. Please request a new OTP.' });
+    }
+
+    if (Date.now() > record.expiresAt) {
+      otpStore.delete(identifier);
+      return res.status(400).json({ message: 'OTP has expired. Please request a new code.' });
+    }
+
+    if (record.otp !== otp.toString().trim()) {
+      return res.status(400).json({ message: 'Invalid OTP code. Please enter the correct code.' });
+    }
+
+    // Password update
+    const user = await getUser({ $or: [{ mobile: identifier }, { email: identifier }] });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    res.json({ message: 'Password reset instruction would be sent via email in production.' });
+
+    const passwordHash = await bcrypt.hash(newPassword, 10);
+    user.password = passwordHash;
+    if (user.save) await user.save();
+
+    otpStore.delete(identifier);
+
+    res.json({ success: true, message: 'Password updated successfully!' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
