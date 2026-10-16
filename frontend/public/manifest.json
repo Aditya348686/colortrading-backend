@@ -1,0 +1,20 @@
+{
+  "short_name": "95 CLUB",
+  "name": "95 CLUB - Premium Lottery & Casino Platform",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#140205",
+  "theme_color": "#190306",
+  "icons": [
+    {
+      "src": "/assets/logo_95club.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}

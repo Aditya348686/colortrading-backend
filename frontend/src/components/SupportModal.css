@@ -1,0 +1,319 @@
+/* Support Modal Styling - 61 CLUB Theme */
+.support-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+.support-modal {
+    width: 100%;
+    max-width: 440px;
+    background-color: #121722;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(34, 197, 94, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    max-height: 85vh;
+    animation: supportPopIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes supportPopIn {
+    from {
+        transform: scale(0.92);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.support-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    background: linear-gradient(90deg, #182232, #121722);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.support-header-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 0.95rem;
+}
+
+.support-badge {
+    background: linear-gradient(90deg, #9ed800 0%, #10b981 100%);
+    color: #0d141e;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+}
+
+.support-close-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: none;
+    color: #94a3b8;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.support-close-btn:hover {
+    background: #ef4444;
+    color: #ffffff;
+}
+
+.support-tabs {
+    display: flex;
+    background-color: #0e121b;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.support-tab {
+    flex: 1;
+    padding: 12px 6px;
+    background: none;
+    border: none;
+    color: #64748b;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.support-tab.active {
+    color: #22c55e;
+    border-bottom-color: #22c55e;
+    background: rgba(34, 197, 94, 0.04);
+}
+
+.support-body {
+    padding: 16px;
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Chat Tab */
+.support-chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 340px;
+}
+
+.support-chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-right: 4px;
+    margin-bottom: 12px;
+}
+
+.support-msg {
+    display: flex;
+}
+
+.support-msg.bot {
+    justify-content: flex-start;
+}
+
+.support-msg.user {
+    justify-content: flex-end;
+}
+
+.support-msg-bubble {
+    max-width: 82%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 0.88rem;
+    line-height: 1.45;
+}
+
+.support-msg.bot .support-msg-bubble {
+    background-color: #1e2738;
+    color: #e2e8f0;
+    border-bottom-left-radius: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.support-msg.user .support-msg-bubble {
+    background: linear-gradient(90deg, #9ed800 0%, #10b981 100%);
+    color: #0b130e;
+    font-weight: 600;
+    border-bottom-right-radius: 2px;
+}
+
+.support-chat-input-row {
+    display: flex;
+    gap: 8px;
+}
+
+.support-input {
+    flex: 1;
+    background-color: #1a2232;
+    border: 1px solid #283448;
+    border-radius: 20px;
+    padding: 10px 14px;
+    color: #ffffff;
+    font-size: 0.88rem;
+    outline: none;
+}
+
+.support-input:focus {
+    border-color: #22c55e;
+}
+
+.support-send-btn {
+    background: linear-gradient(90deg, #9ed800 0%, #10b981 100%);
+    border: none;
+    border-radius: 20px;
+    color: #0b130e;
+    font-weight: 800;
+    padding: 0 16px;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+/* Channels Tab */
+.support-channels-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.support-channel-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background-color: #1a2232;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 14px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.support-channel-card:hover {
+    transform: translateY(-2px);
+    border-color: #22c55e;
+    box-shadow: 0 6px 18px rgba(34, 197, 94, 0.15);
+}
+
+.support-channel-icon {
+    font-size: 1.8rem;
+}
+
+.support-channel-info {
+    flex: 1;
+}
+
+.support-channel-info h4 {
+    margin: 0 0 2px 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.support-channel-info p {
+    margin: 0;
+    font-size: 0.78rem;
+    color: #94a3b8;
+}
+
+.support-channel-arrow {
+    color: #22c55e;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+/* FAQ Tab */
+.support-faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.support-faq-item {
+    background-color: #1a2232;
+    border-radius: 12px;
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.support-faq-q {
+    margin: 0 0 6px 0;
+    font-size: 0.9rem;
+    color: #22c55e;
+    font-weight: 700;
+}
+
+.support-faq-a {
+    margin: 0;
+    font-size: 0.82rem;
+    color: #cbd5e1;
+    line-height: 1.45;
+}
+
+/* Floating Customer Support Button */
+.floating-support-btn {
+    position: fixed;
+    bottom: 84px;
+    right: 18px;
+    z-index: 999;
+    background: linear-gradient(135deg, #22c55e, #10b981);
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 28px;
+    padding: 10px 16px;
+    font-size: 0.88rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 8px 24px rgba(34, 197, 94, 0.4);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    animation: floatSupportPulse 2.5s infinite ease-in-out;
+}
+
+.floating-support-btn:hover {
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: 0 12px 30px rgba(34, 197, 94, 0.6);
+}
+
+@keyframes floatSupportPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 8px 24px rgba(34, 197, 94, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 12px 32px rgba(34, 197, 94, 0.7);
+    }
+}

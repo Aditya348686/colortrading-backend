@@ -1,0 +1,148 @@
+/* ─── 95 CLUB Luxury 5-Tab Bottom Navigation Bar ─────────────────────────── */
+.bottom-nav-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    background: #150306;
+    background: linear-gradient(180deg, #1c0509 0%, #100204 100%);
+    border-top: 1px solid rgba(244, 63, 94, 0.22);
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.7);
+    padding: 6px 10px 10px;
+}
+
+.bottom-nav-container {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    position: relative;
+}
+
+.bnav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    text-decoration: none;
+    color: #8a6a6e;
+    font-size: 0.7rem;
+    font-weight: 700;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 4px 0;
+}
+
+.bnav-item:hover {
+    color: #ff8595;
+}
+
+.bnav-item.active {
+    color: #ff4d67;
+}
+
+.bnav-item.active .bnav-icon svg {
+    fill: #ff4d67;
+    filter: drop-shadow(0 0 6px rgba(255, 77, 103, 0.5));
+    transform: scale(1.08);
+}
+
+.bnav-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    transition: transform 0.2s;
+}
+
+.bnav-icon svg {
+    transition: all 0.2s;
+}
+
+.bnav-icon.has-badge .bnav-dot {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 7px;
+    height: 7px;
+    background: #ef4444;
+    border-radius: 50%;
+    border: 1.5px solid #1c0509;
+    animation: pulse-dot 1.5s infinite;
+}
+
+.bnav-label {
+    letter-spacing: 0.02em;
+}
+
+/* ── Center Raised Promotion Diamond Button ── */
+.bnav-center-item {
+    flex: 1.1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    position: relative;
+    margin-top: -20px;
+}
+
+.bnav-floating-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff4d67 0%, #f43f5e 50%, #e11d48 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 18px rgba(244, 63, 94, 0.55), 0 0 0 4px #150306;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s;
+    cursor: pointer;
+}
+
+.bnav-center-item:hover .bnav-floating-btn,
+.bnav-center-item.active .bnav-floating-btn {
+    transform: translateY(-4px) scale(1.06);
+    box-shadow: 0 8px 25px rgba(244, 63, 94, 0.8), 0 0 0 4px #150306;
+}
+
+.bnav-diamond-glow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: float-diamond 3s ease-in-out infinite;
+}
+
+@keyframes float-diamond {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-2px);
+    }
+}
+
+.bnav-promo-label {
+    margin-top: 5px;
+    color: #ff9aa7;
+    font-size: 0.7rem;
+    font-weight: 800;
+}
+
+@media (min-width: 768px) {
+    .bottom-nav-bar {
+        max-width: 480px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 20px 20px 0 0;
+    }
+}
